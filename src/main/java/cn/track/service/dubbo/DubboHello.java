@@ -5,4 +5,6 @@ package cn.track.service.dubbo;
  */
 public interface DubboHello {
 	String sayHello (String str);
+
+	boolean saveUser (String name, String pwd);
 }

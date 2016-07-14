@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="hellodubbo">
+    <output-path>$PROJECT_DIR$/out/artifacts/hellodubbo</output-path>
+    <root id="archive" name="hellodubbo.jar">
+      <element id="directory" name="cn">
+        <element id="directory" name="track">
+          <element id="directory" name="service">
+            <element id="directory" name="dubbo">
+              <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/track/exploded/track.war/WEB-INF/classes/cn/track/service/dubbo/DubboHello.class" />
+            </element>
+          </element>
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
