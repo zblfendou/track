@@ -17,7 +17,7 @@ public class RabbitMQDemo extends Base {
 	@Test
 	public void testSendMessage () {
 		CommonMessage message = new CommonMessage ();
-		message.setSource ("tonson");
+		message.setSource ("中文测试");
 		JSONObject obj = new JSONObject ();
 		obj.put ("test", "test json message");
 		message.setMessage (obj);

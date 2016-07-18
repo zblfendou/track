@@ -13,7 +13,7 @@
           p:poolProperties-ref="poolProperties"/>
 
     <bean id="poolProperties" class="org.apache.tomcat.jdbc.pool.PoolProperties"
-          p:url="jdbc:mysql://172.23.201.44:3306/track" p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
+          p:url="jdbc:mysql://127.0.0.1:3306/track" p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
           p:password="root" p:jmxEnabled="true" p:testWhileIdle="true"
           p:testOnBorrow="true" p:validationInterval="30000" p:testOnReturn="false" p:validationQuery="select 1"
           p:timeBetweenEvictionRunsMillis="300000" p:maxActive="100" p:initialSize="10" p:maxWait="100000"
