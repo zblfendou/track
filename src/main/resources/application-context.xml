@@ -61,7 +61,7 @@
     <!-- 注解式事务 -->
     <tx:annotation-driven transaction-manager="txManager"/>
 
-    <context:component-scan base-package="cn.track.**">
+    <context:component-scan base-package="cn.track.service.**">
         <context:exclude-filter type="assignable" expression="org.springframework.data.repository.Repository"/>
     </context:component-scan>
     <!--初始化数据库脚本-->
