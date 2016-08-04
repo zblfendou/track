@@ -15,7 +15,7 @@ public class CodeUtils implements Serializable {
 	 * @return
 	 */
 	private static String generateUUID () {
-		return UUID.randomUUID ().toString ();
+		return UUID.randomUUID ().toString ().replaceAll ("-", "");
 	}
 
 	public static void main (String[] args) {
