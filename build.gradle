@@ -18,6 +18,8 @@ dependencies {
     compile('javax.servlet:servlet-api:3.0-alpha-1')
     compile('net.coobird:thumbnailator:0.4.8')
     compile('org.springframework:spring-context:4.2.4.RELEASE')
+    compile('org.springframework:spring-context-support:4.2.4.RELEASE')
+
     compile('org.springframework:spring-web:4.2.4.RELEASE')
     compile('org.springframework:spring-webmvc:4.2.4.RELEASE')
     compile('javax.inject:javax.inject:1')
