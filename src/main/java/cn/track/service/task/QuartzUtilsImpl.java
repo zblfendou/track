@@ -1,9 +1,9 @@
 package cn.track.service.task;
 
-import cn.track.models.task.*;
+import cn.track.models.task.TimedTask;
 import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import javax.inject.*;
 
@@ -13,7 +13,7 @@ import javax.inject.*;
 @Named ("quartzUtils")
 public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 	@Inject
-	private SchedulerFactory schedulerFactory;
+	private SchedulerFactoryBean schedulerFactoryBean;
 
 	/**
 	 * Invoked by a BeanFactory after it has set all bean properties supplied
@@ -38,7 +38,7 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 	@Override
 	public void addTimedTaskSchedule (TimedTask job) {
 		try {
-			Scheduler scheduler = new StdSchedulerFactory ().getScheduler ();
+			Scheduler scheduler = schedulerFactoryBean.getScheduler ();
 			TriggerKey triggerKey = TriggerKey.triggerKey (job.getJobName (), job.getJobGroup ());
 			Trigger trigger = scheduler.getTrigger (triggerKey);
 			// 不存在，创建一个
@@ -59,11 +59,10 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 		} catch (SchedulerException e) {
 			e.printStackTrace ();
 		}
-
 	}
 
 	@DisallowConcurrentExecution
-	private class TimedTaskExecuteImpl implements Job {
+	public static class TimedTaskExecuteImpl implements Job {
 
 		@Override
 		public void execute (JobExecutionContext context) throws JobExecutionException {
@@ -71,7 +70,7 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 			System.out.println ("TimedTaskExecuteImpl->打印出点啥就行");
 			try {
 				SchedulerContext schedulerContext = context.getScheduler ().getContext ();
-				TaskExecuter executer = (TaskExecuter) schedulerContext.get ("taskExecuter");
+				TaskExecuter executer = (TaskExecuter) schedulerContext.get ("taskExcuter");
 				TimedTask scheduleJob = (TimedTask) context.getMergedJobDataMap ().get ("scheduleJob");
 				executer.executeTask (scheduleJob);
 			} catch (SchedulerException e) {

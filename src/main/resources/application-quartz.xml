@@ -3,9 +3,12 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean name="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <!-- 通过applicationContextSchedulerContextKey属性配置spring上下文 -->
-        <property name="applicationContextSchedulerContextKey">
-            <value>applicationContext</value>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="transactionManager" ref="txManager"/>
+        <property name="schedulerContextAsMap">
+            <map>
+                <entry key="taskExcuter" value-ref="taskExecuter"/>
+            </map>
         </property>
     </bean>
 </beans>
