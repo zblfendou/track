@@ -76,7 +76,7 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 			System.out.println ("TimedTaskExecuteImpl->打印出点啥就行");
 			try {
 				SchedulerContext schedulerContext = context.getScheduler ().getContext ();
-				TaskExcuter executer = (TaskExcuter) schedulerContext.get ("taskExcuter");
+				TaskExecutor executer = (TaskExecutor) schedulerContext.get ("taskExecutor");
 				TimedTask scheduleJob = (TimedTask) context.getMergedJobDataMap ().get ("scheduleJob");
 				executer.executeTask (scheduleJob);
 			} catch (SchedulerException e) {

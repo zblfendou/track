@@ -7,7 +7,7 @@
         <property name="transactionManager" ref="txManager"/>
         <property name="schedulerContextAsMap">
             <map>
-                <entry key="taskExcuter" value-ref="taskExcuter"/>
+                <entry key="taskExecutor" value-ref="quartz_taskExecutor"/>
             </map>
         </property>
     </bean>
