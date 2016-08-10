@@ -2,12 +2,12 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean name="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <bean name="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionManager" ref="txManager"/>
         <property name="schedulerContextAsMap">
             <map>
-                <entry key="taskExcuter" value-ref="taskExecuter"/>
+                <entry key="taskExcuter" value-ref="taskExcuter"/>
             </map>
         </property>
     </bean>

@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2016.8.5.
  */
-@Named ("taskExecuter")
-public class TaskExecuter {
+@Named ("taskExcuter")
+public class TaskExcuter {
 	@Inject
 	private UserService userService;
 	public void executeTask (TimedTask timedTask) {
@@ -23,6 +23,6 @@ public class TaskExecuter {
 	public void executeTask (TestTimeTask task) {
 		List<User> allUser = userService.getAllUser ();
 		System.out.println ("用户总数量:" + allUser.size ());
-		System.out.println ("TaskExecuter:doing that->" + task.getJobName () + "  " + task.getJobGroup ());
+		System.out.println ("TaskExcuter:doing that->" + task.getJobName () + "  " + task.getJobGroup ());
 	}
 }

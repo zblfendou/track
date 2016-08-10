@@ -2,8 +2,8 @@ package cn.track.service.task;
 
 import cn.track.models.task.TimedTask;
 import org.quartz.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import javax.inject.*;
 
@@ -12,8 +12,10 @@ import javax.inject.*;
  */
 @Named ("quartzUtils")
 public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
+	private static final Logger logger = LoggerFactory.getLogger (QuartzUtilsImpl.class);
+
 	@Inject
-	private SchedulerFactoryBean schedulerFactoryBean;
+	private Scheduler scheduler;
 
 	/**
 	 * Invoked by a BeanFactory after it has set all bean properties supplied
@@ -32,13 +34,17 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 
 	@Override
 	public void cancelTimedTaskSchedule (TimedTask job) {
-
+		TriggerKey triggerKey = TriggerKey.triggerKey (job.getJobName (), job.getJobGroup ());
+		try {
+			scheduler.unscheduleJob (triggerKey);
+		} catch (SchedulerException e) {
+			logger.debug ("取消任务失败", e);
+		}
 	}
 
 	@Override
 	public void addTimedTaskSchedule (TimedTask job) {
 		try {
-			Scheduler scheduler = schedulerFactoryBean.getScheduler ();
 			TriggerKey triggerKey = TriggerKey.triggerKey (job.getJobName (), job.getJobGroup ());
 			Trigger trigger = scheduler.getTrigger (triggerKey);
 			// 不存在，创建一个
@@ -70,7 +76,7 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 			System.out.println ("TimedTaskExecuteImpl->打印出点啥就行");
 			try {
 				SchedulerContext schedulerContext = context.getScheduler ().getContext ();
-				TaskExecuter executer = (TaskExecuter) schedulerContext.get ("taskExcuter");
+				TaskExcuter executer = (TaskExcuter) schedulerContext.get ("taskExcuter");
 				TimedTask scheduleJob = (TimedTask) context.getMergedJobDataMap ().get ("scheduleJob");
 				executer.executeTask (scheduleJob);
 			} catch (SchedulerException e) {
