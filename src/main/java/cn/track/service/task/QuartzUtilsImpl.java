@@ -6,6 +6,7 @@ import org.slf4j.*;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.inject.*;
+import java.util.*;
 
 /**
  * Created by Administrator on 2016.8.5.
@@ -48,10 +49,10 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 			TriggerKey triggerKey = TriggerKey.triggerKey (job.getJobName (), job.getJobGroup ());
 			Trigger trigger = scheduler.getTrigger (triggerKey);
 			// 不存在，创建一个
+			JobDetail jobDetail = JobBuilder.newJob (TimedTaskExecuteImpl.class).withIdentity (job.getJobName (),
+					job.getJobGroup ()).build ();
+			jobDetail.getJobDataMap ().put ("scheduleJob", job);
 			if (null == trigger) {
-				JobDetail jobDetail = JobBuilder.newJob (TimedTaskExecuteImpl.class).withIdentity (job.getJobName (),
-						job.getJobGroup ()).build ();
-				jobDetail.getJobDataMap ().put ("scheduleJob", job);
 				// 按新的表达式构建一个新的trigger
 				trigger = TriggerBuilder.newTrigger ().withIdentity (job.getJobName (), job.getJobGroup ()).startAt (job.getStartTime ()).build ();
 				scheduler.scheduleJob (jobDetail, trigger);
@@ -59,8 +60,10 @@ public class QuartzUtilsImpl implements QuartzUtils, InitializingBean {
 				// trigger已存在，则更新相应的定时设置
 				trigger = trigger.getTriggerBuilder ().withIdentity (triggerKey)
 						.startAt (job.getStartTime ()).build ();
-				// 按新的trigger重新设置job执行
-				scheduler.rescheduleJob (triggerKey, trigger);
+				// 按新的trigger重新设置job执行，重新设置一次jobdetail的目的是detail中数据如果有变化，可以及时更新。
+				Set<Trigger> triggersForJob = new HashSet<> ();
+				triggersForJob.add (trigger);
+				scheduler.scheduleJob (jobDetail, triggersForJob, true);
 			}
 		} catch (SchedulerException e) {
 			e.printStackTrace ();
