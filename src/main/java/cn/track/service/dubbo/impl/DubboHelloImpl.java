@@ -1,10 +1,10 @@
 package cn.track.service.dubbo.impl;
 
-import cn.track.models.user.User;
 import cn.track.service.dubbo.DubboHello;
 import cn.track.service.user.UserService;
 
-import javax.inject.*;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Created by Administrator on 2016.6.27.
@@ -23,8 +23,7 @@ public class DubboHelloImpl implements DubboHello {
 	@Override
 	public boolean saveUser (String name, String pwd) {
 		try {
-			User user = new User (name, pwd);
-			userService.addUser (user);
+			userService.addUser(name, pwd);
 		} catch (Exception e) {
 			e.printStackTrace ();
 			return false;

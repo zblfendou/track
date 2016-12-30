@@ -20,7 +20,11 @@ public class User extends BaseModel {
 	public User () {
 	}
 
-	public String getName () {
+	public User(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
 		return name;
 	}
 

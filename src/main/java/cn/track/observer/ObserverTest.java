@@ -7,7 +7,8 @@ public class ObserverTest {
 	public static void main (String[] args) {
 		ExampleObservable example = new ExampleObservable ();
 		example.addObserver (new ExampleObserver ());
-		example.setData (2);
+        example.addObserver(new ExampleObserver2());
+        example.setData (2);
 		example.setData (- 5);
 		example.setData (30);
 

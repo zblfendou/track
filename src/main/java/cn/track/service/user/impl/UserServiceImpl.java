@@ -6,7 +6,8 @@ import cn.track.service.aop.EventCutPoint;
 import cn.track.service.user.UserService;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.*;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -20,7 +21,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	@EventCutPoint
-	public void addUser (User user) {
+	public void addUser(String name) {
+		final User user = new User(name);
+		userDao.save(user);
+	}
+
+	@Override
+	@Transactional
+	@EventCutPoint
+	public void addUser(String name, String pwd) {
+		final User user = new User(name, pwd);
 		userDao.save (user);
 	}
 
