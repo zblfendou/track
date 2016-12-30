@@ -1,10 +1,12 @@
 package cn.track.service.task;
 
-import cn.track.models.task.*;
+import cn.track.models.task.TestTimeTask;
+import cn.track.models.task.TimedTask;
 import cn.track.models.user.User;
 import cn.track.service.user.UserService;
 
-import javax.inject.*;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 
 /**
@@ -23,6 +25,6 @@ public class TaskExecutor {
 	public void executeTask (TestTimeTask task) {
 		List<User> allUser = userService.getAllUser ();
 		System.out.println ("用户总数量:" + allUser.size ());
-		System.out.println ("TaskExecutor:doing that->" + task.getJobName () + "  " + task.getJobGroup ());
-	}
+        System.out.println("TaskExecutor:doing->" + task.getJobName() + "  " + task.getJobGroup());
+    }
 }

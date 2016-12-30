@@ -1,9 +1,10 @@
 package cn.track.observer;
 
-import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
- * Created by Administrator on 2016.8.2.
+ * 观察者
  */
 public class ExampleObserver implements Observer {
 	/**

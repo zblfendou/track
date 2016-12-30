@@ -1,7 +1,7 @@
 package cn.track.observer;
 
 /**
- * Created by Administrator on 2016.8.2.
+ * 观察者模式测试类
  */
 public class ObserverTest {
 	public static void main (String[] args) {

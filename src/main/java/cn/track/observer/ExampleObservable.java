@@ -3,7 +3,7 @@ package cn.track.observer;
 import java.util.Observable;
 
 /**
- * Created by Administrator on 2016.8.2.
+ * 被观察者
  */
 public class ExampleObservable extends Observable {
 	int data = 0;
