@@ -16,11 +16,8 @@ public class UserTest extends Base {
 
 	@Test
 	public void addUser(){
-		cn.track.models.user.User user = new cn.track.models.user.User ();
-		user.setName ("lyp");
-		user.setPwd ("1234");
-        userService.addUser(name);
-    }
+		userService.addUser("lyp");
+	}
 
 	@Test
 	public void updateUser() {

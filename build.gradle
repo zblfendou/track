@@ -28,7 +28,7 @@ dependencies {
     compile('org.springframework:spring-web:4.2.4.RELEASE')
     compile('org.springframework:spring-webmvc:4.2.4.RELEASE')
     compile('javax.inject:javax.inject:1')
-    compile('mysql:mysql-connector-java:5.1.38')
+    compile('mysql:mysql-connector-java:5.1.40')
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final')
     compile('org.springframework.data:spring-data-jpa:1.9.1.RELEASE')
     compile('net.sf.ehcache:ehcache-core:2.6.9')

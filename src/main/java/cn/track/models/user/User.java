@@ -39,4 +39,5 @@ public class User extends BaseModel {
 	public void setPwd (String pwd) {
 		this.pwd = pwd;
 	}
+
 }

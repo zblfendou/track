@@ -79,6 +79,6 @@
 
     <!--初始化数据库脚本-->
     <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-        <jdbc:script location="classpath:sql/Quartz.creat.sql"/>
+        <jdbc:script location="classpath:sql/Quartz.creat.sql" encoding="UTF-8"/>
     </jdbc:initialize-database>
 </beans>
