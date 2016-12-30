@@ -10,13 +10,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 引入jdbc配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
     <!--数据源配置-->
     <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close"
           p:poolProperties-ref="poolProperties"/>
 
     <bean id="poolProperties" class="org.apache.tomcat.jdbc.pool.PoolProperties"
-          p:url="jdbc:mysql://127.0.0.1:3306/track" p:driverClassName="com.mysql.jdbc.Driver" p:username="root"
-          p:password="root" p:jmxEnabled="true" p:testWhileIdle="true"
+          p:url="${jdbcUrl}" p:driverClassName="${jdbcDriverClassName}" p:username="${jdbcUsername}"
+          p:password="${jdbcPassword}" p:jmxEnabled="true" p:testWhileIdle="true"
           p:testOnBorrow="true" p:validationInterval="30000" p:testOnReturn="false" p:validationQuery="select 1"
           p:timeBetweenEvictionRunsMillis="300000" p:maxActive="100" p:initialSize="10" p:maxWait="100000"
           p:removeAbandonedTimeout="36000" p:minEvictableIdleTimeMillis="300000" p:minIdle="10" p:logAbandoned="true"
@@ -29,7 +37,7 @@
           p:packagesToScan="cn.track.**.models">
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.max_fetch_depth">3</prop>
                 <prop key="hibernate.jdbc.fetch_size">18</prop>
                 <prop key="hibernate.jdbc.batch_size">10</prop>
