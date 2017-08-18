@@ -4,11 +4,11 @@ apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
+version='track'
 repositories {
-    maven {
+    /*maven {
         url 'http://localserver:8089/repository/internal'
-    }
+    }*/
     mavenCentral()
 }
 [compileJava, compileTestJava, javadoc]*.options*.encoding = "UTF-8"
@@ -74,6 +74,6 @@ dependencies {
     testCompile('dom4j:dom4j:1.6.1')
 }
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.5'
+    gradleVersion = '4.0.2'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
