@@ -73,8 +73,7 @@ dependencies {
     testCompile('junit:junit:4.12')
     testCompile('dom4j:dom4j:1.6.1')
 }
-/*
 task wrapper(type: Wrapper) {
     gradleVersion = '4.0.2'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
-}*/
+}

@@ -21,6 +21,7 @@ public class UserTest extends Base {
 
 	@Test
 	public void updateUser() {
+		addUser();
 		User user = userService.getUser (1);
 		user.setName ("李四");
 		userService.updateUser (user);
