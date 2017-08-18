@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	@EventCutPoint
-	public void addUser(String name) {
+	public User addUser(String name) {
 		final User user = new User(name);
-		userDao.save(user);
+		return userDao.save(user);
 	}
 
 	@Override

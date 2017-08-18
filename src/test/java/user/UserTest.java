@@ -13,16 +13,17 @@ import javax.inject.Inject;
 public class UserTest extends Base {
 	@Inject
 	private UserService userService;
+	private long userId;
 
 	@Test
 	public void addUser(){
-		userService.addUser("lyp");
+		userId = userService.addUser("lyp").getId();
 	}
 
 	@Test
 	public void updateUser() {
 		addUser();
-		User user = userService.getUser (1);
+		User user = userService.getUser (userId);
 		user.setName ("李四");
 		userService.updateUser (user);
 	}
